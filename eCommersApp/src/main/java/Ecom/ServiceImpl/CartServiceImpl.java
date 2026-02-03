@@ -9,6 +9,7 @@ import Ecom.Exception.ProductException;
 import Ecom.Exception.UserException;
 import Ecom.Model.Cart;
 import Ecom.Model.CartItem;
+import Ecom.Model.Product;
 import Ecom.Model.User;
 import Ecom.Repository.CartItemRepository;
 import Ecom.Repository.CartRepository;

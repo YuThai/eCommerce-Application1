@@ -228,7 +228,8 @@ public class AppConfig {
                     "http://localhost:3000",
                     "http://localhost:5173",
                     "https://ecommer.up.railway.app",
-                    "https://eccomers96.netlify.app"
+                    "https://eccomers96.netlify.app",
+                    "https://test-frontend-8ugs.onrender.com"
                 ));
 
                 cfg.setAllowedMethods(List.of(
