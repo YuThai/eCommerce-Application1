@@ -117,7 +117,7 @@
 import React, { useState, useEffect } from "react";
 import "../comp_css/Login.css";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../Router/api";
 import loginbg from "../picture/loginbg1.webp";
 
 const bg = {
@@ -153,22 +153,23 @@ const Login = () => {
     try {
       const basicAuth = "Basic " + btoa(`${form.username}:${form.password}`);
 
-      const response = await axios.get(
-        "https://ecommer.up.railway.app/ecom/signIn",
-        {
-          headers: {
-            Authorization: basicAuth,
-          },
-          withCredentials: false, // 🔥 quan trọng
-        }
-      );
+      const response = await api.get("/ecom/signIn", {
+        headers: {
+          Authorization: basicAuth,
+        },
+      });
 
       console.log("LOGIN RESPONSE:", response.data);
 
-      if (response.data && response.data.token) {
-        localStorage.setItem("jwtToken", response.data.token);
-        localStorage.setItem("userid", response.data.id);
-        localStorage.setItem("name", response.data.firstNAme);
+      const token =
+        response.data?.token ||
+        response.headers?.authorization ||
+        response.headers?.Authorization;
+
+      if (token) {
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("userid", response.data?.id);
+        localStorage.setItem("name", response.data?.firstNAme || "");
 
         alert("Login successful ✅");
         navigate("/");

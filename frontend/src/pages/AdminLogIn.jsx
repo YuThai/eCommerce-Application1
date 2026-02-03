@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../comp_css/Login.css";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../Router/api";
 
 const formData = {
   username: "",
@@ -26,15 +26,20 @@ const AdminLogin = () => {
 
     try {
       const authHeader = `Basic ${btoa(`${form.username}:${form.password}`)}`;
-      const response = await axios.get("http://localhost:8080/ecom/signIn", {
+      const response = await api.get("/ecom/signIn", {
         headers: {
           Authorization: authHeader,
         },
       });
 
-      if (response.headers.authorization != undefined) {
-        localStorage.setItem("jwtToken", response.headers.authorization);
-        localStorage.setItem("adminid", response.data.id);
+      const token =
+        response.data?.token ||
+        response.headers?.authorization ||
+        response.headers?.Authorization;
+
+      if (token) {
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("adminid", response.data?.id);
         alert("Admin Login successfully");
         navigate("/admin/admin");
       } else {

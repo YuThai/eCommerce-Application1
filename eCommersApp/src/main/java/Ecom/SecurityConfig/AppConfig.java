@@ -150,8 +150,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -227,11 +225,10 @@ public class AppConfig {
                 CorsConfiguration cfg = new CorsConfiguration();
 
                 cfg.setAllowedOriginPatterns(List.of(
-                        "http://localhost:3000",
-                        "http://127.0.0.1:3000",
-                        "https://ecommer.up.railway.app",
-                        "https://eccomers96.netlify.app",
-                        "https://*.netlify.app"
+                    "http://localhost:3000",
+                    "http://localhost:5173",
+                    "https://ecommer.up.railway.app",
+                    "https://eccomers96.netlify.app"
                 ));
 
                 cfg.setAllowedMethods(List.of(
@@ -245,26 +242,6 @@ public class AppConfig {
                 return cfg;
             }
         };
-    }
-
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowCredentials(true);
-        cfg.setAllowedOriginPatterns(List.of(
-                "http://localhost:3000",
-                "http://127.0.0.1:3000",
-                "https://ecommer.up.railway.app",
-                "https://eccomers96.netlify.app",
-                "https://*.netlify.app"
-        ));
-        cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        cfg.setAllowedHeaders(List.of("*"));
-        cfg.setExposedHeaders(List.of("Authorization"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", cfg);
-        return new CorsFilter(source);
     }
 
     @Bean
