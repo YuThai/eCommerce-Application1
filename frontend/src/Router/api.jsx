@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://ecommer.up.railway.app',
+  baseURL: 'https://test-9she.onrender.com',
 });
 
 api.interceptors.request.use(

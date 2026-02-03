@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../comp_css/AllProductAdmin.css";
-import axios from "axios";
 import api from "../Router/api";
 import UpdateProductForm from "./UpdateProductForm";
 
@@ -57,8 +56,8 @@ const AllProductAdmin = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8080/ecom/products/all?sort=desc")
+    api
+      .get("/ecom/products/all?sort=desc")
       .then((response) => {
         const sortedProducts = response.data.sort(
           (a, b) => b.productId - a.productId

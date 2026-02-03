@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "../comp_css/Product.css";
 import api from "../Router/api";
 
@@ -38,8 +37,8 @@ const Product = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8080/ecom/products/all")
+    api
+      .get("/ecom/products/all")
       .then((response) => {
         setProducts(response.data);
         filterProducts(selectedCategory, priceOrder, nameSearch, response.data);
