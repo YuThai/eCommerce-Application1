@@ -170,9 +170,15 @@ const Login = () => {
         localStorage.setItem("jwtToken", token);
         localStorage.setItem("userid", response.data?.id);
         localStorage.setItem("name", response.data?.firstNAme || "");
+        
+        // 🔥 Lưu cartId từ response
+        if (response.data?.cartId) {
+          localStorage.setItem("cartid", response.data.cartId);
+        }
 
         alert("Login successful ✅");
-        navigate("/");
+        // Hard refresh để React reload state
+        window.location.href = "/";
       } else {
         alert("Login failed ❌");
       }

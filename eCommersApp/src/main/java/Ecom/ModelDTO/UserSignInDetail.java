@@ -11,4 +11,6 @@ public class UserSignInDetail {
     String lastName;
     String signinStatus;
     String token;
+    Integer cartId;
 }
+

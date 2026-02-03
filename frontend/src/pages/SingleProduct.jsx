@@ -28,6 +28,8 @@ const SingleProduct = () => {
       .then((response) => {
         localStorage.setItem("cartid", response.data.cartId);
         alert("Product added to Cart.....");
+        // 🔥 Hard refresh để cập nhật cart
+        window.location.reload();
       })
       .catch((error) => {
         alert("Product Alredy in cart......");

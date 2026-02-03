@@ -35,6 +35,11 @@ public class LoginController {
 			String token = (String) request.getAttribute("jwtToken");
 			signinSuceesData.setToken(token);
 
+			// Lấy cartId từ user cart
+			if (customer.getCart() != null) {
+				signinSuceesData.setCartId(customer.getCart().getCartId());
+			}
+
 			return new ResponseEntity<>(signinSuceesData, HttpStatus.OK);
 		}
 		catch(UserException ex ){
