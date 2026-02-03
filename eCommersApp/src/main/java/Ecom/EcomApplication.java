@@ -22,8 +22,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
 public class EcomApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcomApplication.class, args);
-		System.out.println("Application started........................");
+		// SpringApplication.run(EcomApplication.class, args);
+		// System.out.println("Application started........................");
+		System.out.println("=== APP STARTING ===");
+        SpringApplication.run(EcomApplication.class, args);
+        System.out.println("=== APP STARTED ===");
 	}
 
 }
