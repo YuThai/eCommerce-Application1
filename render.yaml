@@ -1,0 +1,41 @@
+services:
+  # ========== BACKEND SERVICE ==========
+  - type: web
+    name: ecommerce-backend
+    env: java
+    plan: free
+    region: oregon
+    buildCommand: cd eCommersApp && mvn clean package -DskipTests
+    startCommand: java -jar eCommersApp/target/Ecom-0.0.1-SNAPSHOT.jar
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8081
+      - key: JAVA_VERSION
+        value: 17
+      - key: DB_URL
+        value: jdbc:mysql://mysql.example.com:3306/ecommerce_db?useSSL=false&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        sync: false
+
+  # ========== FRONTEND SERVICE ==========
+  - type: web
+    name: ecommerce-frontend
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npx serve -s build -l 3000
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://ecommerce-backend.onrender.com
+
+  # ========== DATABASE SERVICE ==========
+  - type: pserv
+    name: ecommerce-db
+    dbName: ecommerce_db
+    plan: free
+    region: oregon
+    postgresSqlVersion: 15
