@@ -229,7 +229,9 @@ public class AppConfig {
                     "http://localhost:5173",
                     "https://ecommer.up.railway.app",
                     "https://eccomers96.netlify.app",
-                    "https://test-frontend-8ugs.onrender.com"
+                    "https://test-frontend-8ugs.onrender.com",
+                    "https://ecommerce-frontend-wulx.onrender.com",
+                    "https://*.onrender.com"
                 ));
 
                 cfg.setAllowedMethods(List.of(
