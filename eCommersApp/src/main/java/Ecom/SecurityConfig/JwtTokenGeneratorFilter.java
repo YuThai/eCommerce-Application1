@@ -102,7 +102,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
         	
             SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes());
            
-            String jwt = Jwts.builder()
+                String jwt = Jwts.builder()
             		.setIssuer("e-commerse")
             		.setSubject("JWT Token")
                     .claim("username", authentication.getName())
@@ -111,6 +111,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
                     .setExpiration(new Date(new Date().getTime()+ 30000000)) 
                     .signWith(key).compact();       
             response.setHeader(SecurityConstants.JWT_HEADER, jwt);
+                request.setAttribute("jwtToken", jwt);
  
         }
         filterChain.doFilter(request, response);	
